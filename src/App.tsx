@@ -11,12 +11,10 @@ import type {PropsWithChildren} from 'react';
 import {
   Image,
   Pressable,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
+
   StyleSheet,
   Text,
-  useColorScheme,
+  ImageSourcePropType,
   View,
 } from 'react-native';
 
@@ -29,6 +27,10 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
+type Diceprops = PropsWithChildren<{
+  imageUrl: ImageSourcePropType
+}>;
+
 import DiceOne from '../assets/One.png';
 import DiceTwo from '../assets/Two.png';
 import DiceThree from '../assets/Three.png';
@@ -36,35 +38,42 @@ import DiceFour from '../assets/Four.png';
 import DiceFive from '../assets/Five.png';
 import DiceSix from '../assets/Six.png';
 
+const Dice = ({imageUrl}: Diceprops) => {
+  return (
+    <View>
+    <Image source={imageUrl} style={styles.image} />
+    </View>
+  );
+}
 const options = {
   enableVibrateFallback: true,
   ignoreAndroidSystemSettings: false
 };
 
 function App(): React.JSX.Element {
-  const [image, setImage] = useState(DiceOne);
+  const [diceImage, setDiceImage] = useState<ImageSourcePropType>(DiceOne);
 
   const rollDice = () => {
     const dice = Math.floor(Math.random() * 6) + 1;
 
     switch (dice) {
       case 1:
-        setImage(DiceOne);
+        setDiceImage(DiceOne);
         break;
       case 2:
-        setImage(DiceTwo);
+        setDiceImage(DiceTwo);
         break;
       case 3:
-        setImage(DiceThree);
+        setDiceImage(DiceThree);
         break;
       case 4:
-        setImage(DiceFour);
+        setDiceImage(DiceFour);
         break;
       case 5:
-        setImage(DiceFive);
+        setDiceImage(DiceFive);
         break;
       case 6:
-        setImage(DiceSix);
+        setDiceImage(DiceSix);
         break;
       default:(DiceOne)
     }
@@ -73,9 +82,9 @@ function App(): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={image} />
+      <Dice imageUrl={diceImage} />
   <Pressable style={styles.button}
-  
+  android_ripple={{ color: '#8EA7E9'}}
   onPress={rollDice}>
     <Text style={styles.buttonText}>Roll The Dice</Text>
   </Pressable>
@@ -86,7 +95,7 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center'},
   image: { width: 200, height: 200},
-  button: { padding: 10, borderRadius: 5, borderColor: '#8EA7E9', borderWidth: 2},
+  button: { padding: 10, borderRadius:105, borderColor: '#8EA7E9', borderWidth: 2},
   buttonText: { fontSize: 20, color: '#8EA7E9', textTransform: 'uppercase'},
 });
 
