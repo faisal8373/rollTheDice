@@ -11,7 +11,6 @@ import type {PropsWithChildren} from 'react';
 import {
   Image,
   Pressable,
-
   StyleSheet,
   Text,
   ImageSourcePropType,
@@ -25,10 +24,10 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
 type Diceprops = PropsWithChildren<{
-  imageUrl: ImageSourcePropType
+  imageUrl: ImageSourcePropType;
 }>;
 
 import DiceOne from '../assets/One.png';
@@ -41,13 +40,13 @@ import DiceSix from '../assets/Six.png';
 const Dice = ({imageUrl}: Diceprops) => {
   return (
     <View>
-    <Image source={imageUrl} style={styles.image} />
+      <Image source={imageUrl} style={styles.image} />
     </View>
   );
-}
+};
 const options = {
   enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: false
+  ignoreAndroidSystemSettings: false,
 };
 
 function App(): React.JSX.Element {
@@ -75,28 +74,35 @@ function App(): React.JSX.Element {
       case 6:
         setDiceImage(DiceSix);
         break;
-      default:(DiceOne)
+      default:
+        DiceOne;
     }
-    ReactNativeHapticFeedback.trigger("impactLight", options);
-  }
+    ReactNativeHapticFeedback.trigger('impactLight', options);
+  };
 
   return (
     <View style={styles.container}>
       <Dice imageUrl={diceImage} />
-  <Pressable style={styles.button}
-  android_ripple={{ color: '#8EA7E9'}}
-  onPress={rollDice}>
-    <Text style={styles.buttonText}>Roll The Dice</Text>
-  </Pressable>
+      <Pressable
+        style={styles.button}
+        android_ripple={{color: '#8EA7E9'}}
+        onPress={rollDice}>
+        <Text style={styles.buttonText}>Roll The Dice</Text>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center'},
-  image: { width: 200, height: 200},
-  button: { padding: 10, borderRadius:105, borderColor: '#8EA7E9', borderWidth: 2},
-  buttonText: { fontSize: 20, color: '#8EA7E9', textTransform: 'uppercase'},
+  container: {flex: 1, justifyContent: 'center', alignItems: 'center'},
+  image: {width: 200, height: 200},
+  button: {
+    padding: 10,
+    borderRadius: 105,
+    borderColor: '#8EA7E9',
+    borderWidth: 2,
+  },
+  buttonText: {fontSize: 20, color: '#8EA7E9', textTransform: 'uppercase'},
 });
 
 export default App;
